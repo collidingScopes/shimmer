@@ -31,22 +31,25 @@ var speedInput = document.getElementById("speedInput");
 speedInput.addEventListener('change',getUserInputs);
 var speedInputValue;
 
-var verticalInput = document.getElementById("verticalInput");
-verticalInput.addEventListener('change',setOscSpeed);
-var verticalInputValue = Number(verticalInput.value);
+var xFreqInput = document.getElementById("xFreqInput");
+xFreqInput.addEventListener('change',setOscSpeed);
+var xFreqInputValue;
 
-var horizontalInput = document.getElementById("horizontalInput");
-horizontalInput.addEventListener('change',setOscSpeed);
-var horizontalInputValue = Number(horizontalInput.value);
+var yFreqInput = document.getElementById("yFreqInput");
+yFreqInput.addEventListener('change',setOscSpeed);
+var yFreqInputValue;
 
-//define initial oscillators
-var verticalSpeed;
-var horizontalSpeed;
+var xAmpInput = document.getElementById("xAmpInput");
+xAmpInput.addEventListener('change',getUserInputs);
+var xAmpInputValue;
 
-/*
-var o1 = new Osc(verticalSpeed), o2 = new Osc(verticalSpeed), o3 = new Osc(verticalSpeed),  // osc. for vert
-    o4 = new Osc(horizontalSpeed), o5 = new Osc(horizontalSpeed), o6 = new Osc(horizontalSpeed); // osc. for hori
-*/
+var yAmpInput = document.getElementById("yAmpInput");
+yAmpInput.addEventListener('change',getUserInputs);
+var yAmpInputValue;
+
+var xFreqValue;
+var yFreqValue;
+
 
 //detect user browser
 var ua = navigator.userAgent;
@@ -88,24 +91,23 @@ function getUserInputs(){
     console.log("get user inputs");
     speedInputValue = Number(speedInput.value) /15000;
     videoDuration = Math.max(1,Math.min(120,Number(videoDurationInput.value)));
+    xAmpInputValue = Number(xAmpInput.value);
+    yAmpInputValue = Number(yAmpInput.value);
 }
 
 function setOscSpeed(){
-    verticalInputValue = Number(verticalInput.value);
-    horizontalInputValue = Number(horizontalInput.value);
-
-    verticalSpeed = verticalInputValue * 0.01;
-    horizontalSpeed = horizontalInputValue * 0.01;
+    xFreqValue = Number(xFreqInput.value) / 200;
+    yFreqValue = Number(yFreqInput.value) / 200;
     
     // osc. for vert
-    o1 = new Osc(verticalSpeed);
-    o2 = new Osc(verticalSpeed);
-    o3 = new Osc(verticalSpeed);
+    o1 = new Osc(yFreqValue);
+    o2 = new Osc(yFreqValue);
+    o3 = new Osc(yFreqValue);
     
     // osc. for hori
-    o4 = new Osc(horizontalSpeed);
-    o5 = new Osc(horizontalSpeed);
-    o6 = new Osc(horizontalSpeed);
+    o4 = new Osc(xFreqValue);
+    o5 = new Osc(xFreqValue);
+    o6 = new Osc(xFreqValue);
     
 }
 
@@ -118,7 +120,7 @@ function createAnimation() {
     var h = scaledHeight;
 
     //ctx.drawImage(this, 0, 0);
-    ctx.drawImage(originalImg, 0, 0);
+    //ctx.drawImage(originalImg, 0, 0);
 
     /*
     var o1 = new Osc(0.05), o2 = new Osc(0.03), o3 = new Osc(0.06),  // osc. for vert
@@ -127,7 +129,10 @@ function createAnimation() {
 
     // source grid lines
     x0 = 0, x1 = w * 0.25, x2 = w * 0.5, x3 = w * 0.75, x4 = w,
-    y0 = 0, y1 = h * 0.25, y2 = h * 0.5, y3 = h * 0.75, y4 = h,
+    y0 = 0, y1 = h * 0.25, y2 = h * 0.5, y3 = h * 0.75, y4 = h;
+    
+    var maxXShift = scaledWidth*0.25;
+    var maxYShift = scaledHeight*0.25;
 
     // cache source widths/heights
     sw0 = x1, sw1 = x2 - x1, sw2 = x3 - x2, sw3 = x4 - x3,
@@ -144,9 +149,9 @@ function createAnimation() {
         for (var y = 0; y < h; y++) {
 
             // segment positions
-            var lx1 = x1 + o1.current(y * 0.2) * 2.5,
-                lx2 = x2 + o2.current(y * 0.2) * 2,
-                lx3 = x3 + o3.current(y * 0.2) * 1.5,
+            var lx1 = x1 + o1.current(y * 0.2) * maxXShift * yAmpInputValue/200,
+                lx2 = x2 + o2.current(y * 0.2) * maxXShift * yAmpInputValue/200,
+                lx3 = x3 + o3.current(y * 0.2) * maxXShift * yAmpInputValue/200,
 
                 // segment widths
                 w0 = lx1,
@@ -166,12 +171,11 @@ function createAnimation() {
         vctx.clearRect(0, 0, w, h);    // clear off-screen canvas (only if alpha)
         vctx.drawImage(animation, 0, 0);
         ctx.clearRect(0, 0, w, h);     // clear main (onlyif alpha)
-
         
         for (var x = 0; x < w; x++) {
-            var ly1 = y1 + o4.current(x * 0.32),
-                ly2 = y2 + o5.current(x * 0.3) * 2,
-                ly3 = y3 + o6.current(x * 0.4) * 1.5;
+            var ly1 = y1 + o4.current(x * 0.32)  * maxYShift * xAmpInputValue/200,
+                ly2 = y2 + o5.current(x * 0.3)  * maxYShift * xAmpInputValue/200,
+                ly3 = y3 + o6.current(x * 0.4) *  maxYShift * xAmpInputValue/200;
 
             ctx.drawImage(vcanvas, x, y0, 1, sh0, x, 0        , 1, ly1);
             ctx.drawImage(vcanvas, x, y1, 1, sh1, x, ly1 - 0.5, 1, ly2 - ly1 + 0.5);
@@ -314,8 +318,7 @@ async function recordVideoMuxer() {
     var videoHeight = Math.floor(animation.height/8)*8; //force a number which is divisible by 8
     console.log("Video dimensions: "+videoWidth+", "+videoHeight);
 
-    //hide input table and display user message
-    document.getElementById("inputTable").classList.add("hidden");
+    //display user message
     recordingMessageCountdown(videoDuration);
     recordingMessageDiv.classList.remove("hidden");
     
@@ -390,9 +393,8 @@ async function recordVideoMuxer() {
         finishedBlob = new Blob([buffer]); 
         downloadBlob(new Blob([buffer]));
 
-        //hide user message, show download button
+        //hide user message
         recordingMessageDiv.classList.add("hidden");
-        document.getElementById("inputTable").classList.remove("hidden");
 
     }
 }
@@ -439,8 +441,7 @@ function startMobileRecording(){
     console.log("start simple video recording");
     console.log("Video dimensions: "+animation.width+", "+animation.height);
 
-    //hide input table and display user message
-    document.getElementById("inputTable").classList.add("hidden");
+    //display user message
     recordingMessageCountdown(videoDuration);
     recordingMessageDiv.classList.remove("hidden");
     
@@ -458,9 +459,8 @@ function finishMobileRecording(e) {
         finishedBlob = new Blob(videoData, { 'type': 'video/mp4' });
         downloadBlob(finishedBlob);
         
-        //hide user message, show download button
+        //hide user message
         recordingMessageDiv.classList.add("hidden");
-        document.getElementById("inputTable").classList.remove("hidden");
 
     },500);
 

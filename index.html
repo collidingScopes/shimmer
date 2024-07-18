@@ -10,11 +10,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!--
-        <meta property="og:title" content="Colliding Scopes: kaleidoscope animations" />
-        <meta property="og:description" content="Turn photos into kaleidoscope animations" />
+        <meta property="og:title" content="ShapeShimmer" />
+        <meta property="og:description" content="Turn photos into funky wave animations" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://collidingscopes.github.io/" />
+        <meta property="og:url" content="https://collidingscopes.github.io/shimmer" />
         <meta property="og:image" content="https://collidingscopes.github.io/images/siteOGImage.png">
         <meta property="og:image:type" content="image/png" >
         <meta property="og:image:width" content="800" >
@@ -22,7 +21,6 @@
 
         <link rel="icon" href="images/siteFavicon3.png">
         <link rel="apple-touch-icon" href="images/siteFavicon3.png">
-        -->
 
     </head>
     <body>
@@ -31,7 +29,7 @@
         </div>
 
         <div id="introDiv">
-            <span id="siteNameText">The Shimmerer</span>
+            <span id="siteNameText">ShapeShimmer</span>
             <span id="subtitleText">Turn photos into funky wave animations</span>
         </div>
         
@@ -57,12 +55,21 @@
                         <pre><span class="tableText">Animation Speed</span><br><input class="input-number-noSpinners" type="range" id="speedInput" value="25" min="1" max="100"></pre>
                     </td>
                     <td>
-                        <pre><span class="tableText">X-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="horizontalInput" value="8" min="0" max="50"></pre>
+                        <pre><span class="tableText">X-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="xFreqInput" value="8" min="1" max="50"></pre>
                     </td>
                     <td>
-                        <pre><span class="tableText">Y-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="verticalInput" value="8" min="0" max="50"></pre>
+                        <pre><span class="tableText">Y-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="yFreqInput" value="8" min="1" max="50"></pre>
                     </td>
-
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <pre><span class="tableText">X-wave amplitude</span><br><input class="input-number-noSpinners" type="range" id="xAmpInput" value="10" min="1" max="50"></pre>
+                    </td>
+                    <td>
+                        <pre><span class="tableText">Y-wave amplitude</span><br><input class="input-number-noSpinners" type="range" id="yAmpInput" value="10" min="1" max="50"></pre>
+                    </td>
                 </tr>
 
             </table>
@@ -87,8 +94,6 @@
                 
                 <a href="https://www.buymeacoffee.com/stereoDrift" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
 
-                <p>Enormous thanks and credits to Luke Hannam, whose <a href="https://www.pepperoni.blog/canvas-kaleidoscope/" target="_blank" rel="noopener">blog post</a> explained the code and mechanics for creating kaleidoscope animations in javascript.</p>
-                <p>I made only a few tweaks to Luke's original algorithm, with my main work being to add the front-end user interface allowing users to upload their own photos, control variables like animation speed, and easily export the canvas animation to video.</p>
                 <p>There are a few hotkeys which can speed up using the tool:</p>
                 <ul>
                     <li>Press <b>"r"</b> to start recording a video of the animation. You can specify the length of the video in seconds. An mp4 video file will be exported to your downloads folder afterwards</li>
@@ -104,7 +109,7 @@
         <div id="linksDiv">
             <table id="infoMenuTable">
                 <tr>
-                    <td><button id="gitHubButton"class="socialMediaButton"><a href="https://github.com/collidingScopes/collidingScopes.github.io" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></button></td>
+                    <td><button id="gitHubButton"class="socialMediaButton"><a href="https://github.com/collidingScopes/shimmer" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></button></td>
                     <td><button id="coffeeButton" class="socialMediaButton"><a href="https://www.buymeacoffee.com/stereoDrift" target="_blank" rel="noopener"><i class="fa-solid fa-heart"></i></a></button></td>
                     <td><button id="instagramButton" class="socialMediaButton"><a href="https://www.instagram.com/stereo.drift/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></button></td>
                     <td><button id="emailButton" class="socialMediaButton"><a href="mailto:stereodriftvisuals@gmail.com" target="_blank" rel="noopener"><i class="fa-solid fa-envelope"></i></a></button></td>
