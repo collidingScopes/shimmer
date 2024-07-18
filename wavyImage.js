@@ -13,11 +13,11 @@ imageInput.addEventListener('change', readSourceImage);
 var isImageLoaded = false;
 var imageContainer = document.getElementById('imageContainer');
 
-var actualWidth = 1536; //dimensions of default image
-var actualHeight = 2048;
+var actualWidth = 800; //dimensions of default image
+var actualHeight = 900;
 
-var scaledWidth = 1536;
-var scaledHeight = 2048;
+var scaledWidth = 800;
+var scaledHeight = 900;
 var widthScalingRatio = 1;
 var maxImageWidth = 1000; //can be tweaked
 animation.width = scaledWidth;
@@ -149,9 +149,9 @@ function createAnimation() {
         for (var y = 0; y < h; y++) {
 
             // segment positions
-            var lx1 = x1 + o1.current(y * 0.2) * maxXShift * yAmpInputValue/200,
-                lx2 = x2 + o2.current(y * 0.2) * maxXShift * yAmpInputValue/200,
-                lx3 = x3 + o3.current(y * 0.2) * maxXShift * yAmpInputValue/200,
+            var lx1 = x1 + o1.current(y * 0.2) * maxXShift * yAmpInputValue/300,
+                lx2 = x2 + o2.current(y * 0.2) * maxXShift * yAmpInputValue/300,
+                lx3 = x3 + o3.current(y * 0.2) * maxXShift * yAmpInputValue/300,
 
                 // segment widths
                 w0 = lx1,
@@ -173,9 +173,9 @@ function createAnimation() {
         ctx.clearRect(0, 0, w, h);     // clear main (onlyif alpha)
         
         for (var x = 0; x < w; x++) {
-            var ly1 = y1 + o4.current(x * 0.32)  * maxYShift * xAmpInputValue/200,
-                ly2 = y2 + o5.current(x * 0.3)  * maxYShift * xAmpInputValue/200,
-                ly3 = y3 + o6.current(x * 0.4) *  maxYShift * xAmpInputValue/200;
+            var ly1 = y1 + o4.current(x * 0.32)  * maxYShift * xAmpInputValue/300,
+                ly2 = y2 + o5.current(x * 0.3)  * maxYShift * xAmpInputValue/300,
+                ly3 = y3 + o6.current(x * 0.4) *  maxYShift * xAmpInputValue/300;
 
             ctx.drawImage(vcanvas, x, y0, 1, sh0, x, 0        , 1, ly1);
             ctx.drawImage(vcanvas, x, y1, 1, sh1, x, ly1 - 0.5, 1, ly2 - ly1 + 0.5);

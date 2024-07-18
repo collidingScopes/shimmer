@@ -248,6 +248,10 @@ button {
     font-family: Helvetica;
 }
 
+pre {
+    margin: 0;
+}
+
 /* applies when screen is wide enough */ 
 @media (min-width: 700px) {
     button, .tableText {
