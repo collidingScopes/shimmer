@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!--
+        <meta property="og:title" content="Colliding Scopes: kaleidoscope animations" />
+        <meta property="og:description" content="Turn photos into kaleidoscope animations" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://collidingscopes.github.io/" />
+        <meta property="og:image" content="https://collidingscopes.github.io/images/siteOGImage.png">
+        <meta property="og:image:type" content="image/png" >
+        <meta property="og:image:width" content="800" >
+        <meta property="og:image:height" content="800" >
+
+        <link rel="icon" href="images/siteFavicon3.png">
+        <link rel="apple-touch-icon" href="images/siteFavicon3.png">
+        -->
+
+    </head>
+    <body>
+
+        <div id="coverScreen" class="hidden">
+        </div>
+
+        <div id="introDiv">
+            <span id="siteNameText">The Shimmerer</span>
+            <span id="subtitleText">Turn photos into funky wave animations</span>
+        </div>
+        
+        <div id="toolDiv">
+
+            <canvas id="animation"></canvas>
+            <!-- 
+             width=230 height=300
+            -->
+            <table id="inputTable">
+                <tr>
+                    <td>
+                        <label for="imageInput" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i> Select Image
+                        </label>
+                        <input type="file" id="imageInput" accept="image/*">
+                    </td>
+                    <td><button id="recordVideoButton" class="recordButton">Record Video (r)</button></td>
+                    <td><span class="tableText">Seconds: </span><input type="number" id="videoDurationInput" class="input-number-noSpinners" value="10" min="1" max="120"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre><span class="tableText">Animation Speed</span><br><input class="input-number-noSpinners" type="range" id="speedInput" value="25" min="1" max="100"></pre>
+                    </td>
+                    <td>
+                        <pre><span class="tableText">X-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="horizontalInput" value="8" min="0" max="50"></pre>
+                    </td>
+                    <td>
+                        <pre><span class="tableText">Y-wave frequency</span><br><input class="input-number-noSpinners" type="range" id="verticalInput" value="8" min="0" max="50"></pre>
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <div id="videoRecordingMessageDiv" class="hidden sticky-bottom">
+            </div>
+
+            <div id="imageContainer" class="hidden">
+                <img id="originalImg" src="images/HKSkywalk.jpg">
+            </div>
+
+        </div>
+
+        
+        <div id="notesDiv">
+            <div id="textBox">
+
+                <h2 id="aboutText">About</h2>
+
+                <p>This web tool is completely free, open source, without any paywalls or premium options. You are welcome to use it for personal or commercial purposes.</p>
+                <p>If you found this tool useful, feel free to buy me a coffee. This would be much appreciated during late-night coding sessions!</p>
+                
+                <a href="https://www.buymeacoffee.com/stereoDrift" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
+
+                <p>Enormous thanks and credits to Luke Hannam, whose <a href="https://www.pepperoni.blog/canvas-kaleidoscope/" target="_blank" rel="noopener">blog post</a> explained the code and mechanics for creating kaleidoscope animations in javascript.</p>
+                <p>I made only a few tweaks to Luke's original algorithm, with my main work being to add the front-end user interface allowing users to upload their own photos, control variables like animation speed, and easily export the canvas animation to video.</p>
+                <p>There are a few hotkeys which can speed up using the tool:</p>
+                <ul>
+                    <li>Press <b>"r"</b> to start recording a video of the animation. You can specify the length of the video in seconds. An mp4 video file will be exported to your downloads folder afterwards</li>
+                    <li>Press <b>"p"</b> to pause / play the animation. This lets you stop at an interesting point of the animation</li>
+                    <li>Press <b>"s"</b> to save a screenshot of the current state of the animation (png image)</li>
+                </ul>
+                <p>This project is coded using Javascript, HTML, and CSS (see github repo linked below). Video creation and encoding is done using mp4 muxer.</p>
+                <p>I do not have access to any of the images that you upload here, as all processing is done "client-side" (i.e., <b>no images are saved or stored by me — they stay on your computer only</b>).</p>
+                <p>Feel free to reach out to discuss, ask questions, or to share your creations! The animations can be easily uploaded to instagram or otherwise -- you can tag me <a href="https://www.instagram.com/stereo.drift/" target="_blank" rel="noopener">@stereo.drift</a> :)</p>
+            </div>
+        </div>
+
+        <div id="linksDiv">
+            <table id="infoMenuTable">
+                <tr>
+                    <td><button id="gitHubButton"class="socialMediaButton"><a href="https://github.com/collidingScopes/collidingScopes.github.io" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></button></td>
+                    <td><button id="coffeeButton" class="socialMediaButton"><a href="https://www.buymeacoffee.com/stereoDrift" target="_blank" rel="noopener"><i class="fa-solid fa-heart"></i></a></button></td>
+                    <td><button id="instagramButton" class="socialMediaButton"><a href="https://www.instagram.com/stereo.drift/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></button></td>
+                    <td><button id="emailButton" class="socialMediaButton"><a href="mailto:stereodriftvisuals@gmail.com" target="_blank" rel="noopener"><i class="fa-solid fa-envelope"></i></a></button></td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+    
+    <script src="wavyImage.js"></script>
+    <script src="mp4-muxer-main/build/mp4-muxer.js"></script>
+
+</html>
