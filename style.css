@@ -23,7 +23,7 @@ html, body{
 
 #siteNameText{
     font-size: 42px;
-    font-family: "Permanent Marker", cursive;
+    font-family: "Righteous", sans-serif;
     font-weight: 400;
     font-style: normal;
     display:block;
@@ -31,15 +31,16 @@ html, body{
 
 #subtitleText{
     font-size: 24px;
-    font-family: Helvetica, sans-serif;
-    display:block;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-style: italic;
     margin:0 auto;
 }
 
 #aboutText{
     font-size: 32px;
-    font-family: "Permanent Marker", cursive;
+    font-family: "Righteous", sans-serif;
     font-weight: 400;
     font-style: normal;
     display:block;
