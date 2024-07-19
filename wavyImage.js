@@ -1,7 +1,10 @@
 /*
-var img = new Image();
-img.src = "https://i.imgur.com/nMZoUok.png";
-img.onload = waves;
+To do list:
+Floating options menu -- sticky at bottom of page / can be hidden?
+Site OG properties
+File README / github description
+New font for site
+Name -- "Woven Waves" instead?
 */
 
 var originalImg = document.getElementById("originalImg");
@@ -122,17 +125,12 @@ function createAnimation() {
     //ctx.drawImage(this, 0, 0);
     //ctx.drawImage(originalImg, 0, 0);
 
-    /*
-    var o1 = new Osc(0.05), o2 = new Osc(0.03), o3 = new Osc(0.06),  // osc. for vert
-        o4 = new Osc(0.08), o5 = new Osc(0.04), o6 = new Osc(0.067), // osc. for hori
-    */
-
     // source grid lines
     x0 = 0, x1 = w * 0.25, x2 = w * 0.5, x3 = w * 0.75, x4 = w,
     y0 = 0, y1 = h * 0.25, y2 = h * 0.5, y3 = h * 0.75, y4 = h;
     
-    var maxXShift = scaledWidth*0.25;
-    var maxYShift = scaledHeight*0.25;
+    var maxXShift = scaledHeight*0.25;
+    var maxYShift = scaledWidth*0.25;
 
     // cache source widths/heights
     sw0 = x1, sw1 = x2 - x1, sw2 = x3 - x2, sw3 = x4 - x3,
@@ -148,10 +146,10 @@ function createAnimation() {
         
         for (var y = 0; y < h; y++) {
 
-            // segment positions
-            var lx1 = x1 + o1.current(y * 0.2) * maxXShift * yAmpInputValue/300,
-                lx2 = x2 + o2.current(y * 0.2) * maxXShift * yAmpInputValue/300,
-                lx3 = x3 + o3.current(y * 0.2) * maxXShift * yAmpInputValue/300,
+            // segment positions for Y-waves
+            var lx1 = x1 + o1.current(y * 0.2) * maxYShift * yAmpInputValue/300,
+                lx2 = x2 + o2.current(y * 0.26) * maxYShift * yAmpInputValue/300,
+                lx3 = x3 + o3.current(y * 0.22) * maxYShift * yAmpInputValue/300,
 
                 // segment widths
                 w0 = lx1,
@@ -173,9 +171,10 @@ function createAnimation() {
         ctx.clearRect(0, 0, w, h);     // clear main (onlyif alpha)
         
         for (var x = 0; x < w; x++) {
-            var ly1 = y1 + o4.current(x * 0.32)  * maxYShift * xAmpInputValue/300,
-                ly2 = y2 + o5.current(x * 0.3)  * maxYShift * xAmpInputValue/300,
-                ly3 = y3 + o6.current(x * 0.4) *  maxYShift * xAmpInputValue/300;
+            // segment positions for X-waves
+            var ly1 = y1 + o4.current(x * 0.32)  * maxXShift * xAmpInputValue/300,
+                ly2 = y2 + o5.current(x * 0.3)  * maxXShift * xAmpInputValue/300,
+                ly3 = y3 + o6.current(x * 0.4) *  maxXShift * xAmpInputValue/300;
 
             ctx.drawImage(vcanvas, x, y0, 1, sh0, x, 0        , 1, ly1);
             ctx.drawImage(vcanvas, x, y1, 1, sh1, x, ly1 - 0.5, 1, ly2 - ly1 + 0.5);
@@ -357,7 +356,7 @@ async function recordVideoMuxer() {
       codec: "avc1.42003e",
       width: videoWidth,
       height: videoHeight,
-      bitrate: 5_000_000,
+      bitrate: 7_000_000,
       bitrateMode: "constant",
     });
     //NEW codec: "avc1.42003e",
