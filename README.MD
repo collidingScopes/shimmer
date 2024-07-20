@@ -4,7 +4,7 @@ Live website: https://collidingscopes.github.io/shimmer
 
 Built using javascript, HTML, CSS.
 
-Enormous thanks and credits to user1693593 <a href="https://stackoverflow.com/questions/29586754/how-can-i-recreate-this-wavy-image-effect" target="_blank" rel="noopener">from StackOverflow</a>, who provided the initial code to create this effect.
+Enormous thanks and credits to <a href="https://stackoverflow.com/questions/29586754/how-can-i-recreate-this-wavy-image-effect" target="_blank" rel="noopener">user1693593 from StackOverflow</a>, who provided the initial code to create this effect.
 
 <img src="images/siteOGImage.png">
 <img src="images/neonWaves.gif">

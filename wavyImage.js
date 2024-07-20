@@ -1,11 +1,10 @@
 /*
 To do list:
 Floating options menu -- sticky at bottom of page / can be hidden?
-Site OG properties
-File README / github description
 New idea: mask/separate subject from image, upload that separately from a new layer with just the background. Animate only the foreground
 Add text explaining what types of images work well and what settings (and show examples)
-Real photos: med/high x-amp, low x-freq (opposite for Y)
+For real photos: med/high x-amp, low x-freq (opposite for Y)
+Add carousel with embedded examples from instagram?
 */
 
 var originalImg = document.getElementById("originalImg");
