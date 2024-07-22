@@ -51,7 +51,7 @@ html, body{
 #toolDiv{
     width:100vw;
     box-sizing: border-box;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background-color: white;
     text-align: center;
     justify-content: center;
@@ -60,7 +60,7 @@ html, body{
 #notesDiv{
     width:100vw;
     box-sizing: border-box;
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 10px;
     display: flex;
     justify-content: center;
