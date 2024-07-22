@@ -125,7 +125,7 @@ function createAnimation() {
     var w = scaledWidth;
     var h = scaledHeight;
 
-    document.body.style.width = scaledWidth;
+    document.documentElement.style.width = scaledWidth;
 
     //ctx.drawImage(this, 0, 0);
     //ctx.drawImage(originalImg, 0, 0);
