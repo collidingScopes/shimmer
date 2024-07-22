@@ -69,6 +69,9 @@ if(ua.includes("Android")){
     isAndroid = true;
 }
 console.log("isSafari: "+isSafari+", isIOS: "+isIOS+", isAndroid: "+isAndroid);
+if(isIOS || isAndroid){
+    maxImageWidth = 720;
+}
 
 //video recording function
 var recordBtn = document.getElementById("recordVideoButton");
