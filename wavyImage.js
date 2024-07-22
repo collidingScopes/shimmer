@@ -16,11 +16,11 @@ imageInput.addEventListener('change', readSourceImage);
 var isImageLoaded = false;
 var imageContainer = document.getElementById('imageContainer');
 
-var actualWidth = 800; //dimensions of default image
-var actualHeight = 900;
+var actualWidth = 720; //dimensions of default image
+var actualHeight = 724;
 
-var scaledWidth = 800;
-var scaledHeight = 900;
+var scaledWidth = actualWidth;
+var scaledHeight = actualHeight;
 var widthScalingRatio = 1;
 var maxImageWidth = 1000; //can be tweaked
 animation.width = scaledWidth;
