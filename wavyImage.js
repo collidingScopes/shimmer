@@ -356,7 +356,7 @@ async function recordVideoMuxer() {
       codec: "avc1.42003e",
       width: videoWidth,
       height: videoHeight,
-      bitrate: 10_000_000,
+      bitrate: 14_000_000,
       bitrateMode: "constant",
     });
     //NEW codec: "avc1.42003e",
