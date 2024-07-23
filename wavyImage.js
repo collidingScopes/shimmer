@@ -6,7 +6,6 @@ Add text explaining what types of images work well and what settings (and show e
 For real photos: med/high x-amp, low x-freq (opposite for Y)
 Add carousel with embedded examples from instagram?
 */
-
 var originalImg = document.getElementById("originalImg");
 
 //image upload variables
@@ -57,10 +56,14 @@ var yFreqValue;
 //detect user browser
 var ua = navigator.userAgent;
 var isSafari = false;
+var isFirefox = false;
 var isIOS = false;
 var isAndroid = false;
 if(ua.includes("Safari")){
     isSafari = true;
+}
+if(ua.includes("Firefox")){
+    isFirefox = true;
 }
 if(ua.includes("iPhone") || ua.includes("iPad") || ua.includes("iPod")){
     isIOS = true;
@@ -68,7 +71,7 @@ if(ua.includes("iPhone") || ua.includes("iPad") || ua.includes("iPod")){
 if(ua.includes("Android")){
     isAndroid = true;
 }
-console.log("isSafari: "+isSafari+", isIOS: "+isIOS+", isAndroid: "+isAndroid);
+console.log("isSafari: "+isSafari+", isFirefox: "+isFirefox+", isIOS: "+isIOS+", isAndroid: "+isAndroid);
 if(isIOS || isAndroid){
     maxImageWidth = 720;
 }
@@ -307,7 +310,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 function chooseRecordingFunction(){
-    if(isIOS || isAndroid){
+    if(isIOS || isAndroid || isFirefox){
         startMobileRecording();
     }else {
         recordVideoMuxer();
@@ -338,13 +341,14 @@ async function recordVideoMuxer() {
   
     let muxer = new Mp4Muxer.Muxer({
       target: new Mp4Muxer.ArrayBufferTarget(),
-  
-      video: {
-        // If you change this, make sure to change the VideoEncoder codec as well
-        codec: "avc",
-        width: videoWidth,
-        height: videoHeight,
-      },
+    //let muxer = new Muxer({
+        //target: new ArrayBufferTarget(),
+        video: {
+            // If you change this, make sure to change the VideoEncoder codec as well
+            codec: "avc",
+            width: videoWidth,
+            height: videoHeight,
+        },
   
       // mp4-muxer docs claim you should always use this with ArrayBufferTarget
       fastStart: "in-memory",
