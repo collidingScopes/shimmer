@@ -91,6 +91,18 @@ var videoDurationInput = document.getElementById("videoDurationInput");
 videoDurationInput.addEventListener('change', getUserInputs);
 var videoDuration = Math.max(1,Math.min(120,Number(videoDurationInput.value)));
 
+//randomize inputs button
+var randomizeButton = document.getElementById("randomizeButton");
+randomizeButton.addEventListener('click', randomizeInputs);
+
+//oscillators
+var o1;
+var o2;
+var o3;
+var o4;
+var o5;
+var o6;
+
 //main method
 getUserInputs();
 setOscSpeed();
@@ -218,6 +230,7 @@ function readSourceImage(){
 
     if(playAnimationToggle == true){
         clearInterval(animationInterval);
+        playAnimationToggle = false;
     }
         
     //read image file      
@@ -263,7 +276,7 @@ function readSourceImage(){
             originalImg.height = scaledHeight;
             imageContainer.appendChild(originalImg);
 
-            createAnimation();
+            setTimeout(createAnimation(),1000);
             animation.scrollIntoView({ behavior: "smooth" });
    
         };
@@ -306,6 +319,8 @@ document.addEventListener('keydown', function(event) {
         saveImage();
     }  else if (event.key === 'r') {
         recordVideoMuxer();
+    }  else if (event.key === 'i') {
+        randomizeInputs();
     }
 });
 
@@ -489,4 +504,16 @@ function recordingMessageCountdown(duration){
         }
     },1000);
     
+}
+
+function randomizeInputs(){
+    speedInput.value = Math.ceil(Math.pow(Math.random(),2)*100);
+    xFreqInput.value = Math.ceil(Math.random()*50);
+    yFreqInput.value = Math.ceil(Math.random()*50);
+    xAmpInput.value = Math.ceil(Math.random()*100);
+    yAmpInput.value = Math.ceil(Math.random()*100);
+
+    getUserInputs();
+    setOscSpeed();
+    //createAnimation();
 }
