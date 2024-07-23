@@ -5,6 +5,9 @@ New idea: mask/separate subject from image, upload that separately from a new la
 Add text explaining what types of images work well and what settings (and show examples)
 For real photos: med/high x-amp, low x-freq (opposite for Y)
 Add carousel with embedded examples from instagram?
+Setting preset menu
+allow color filters on original image (B&W, sepia, highlight blue, etc.)
+Z-dimension oscillation?
 */
 var originalImg = document.getElementById("originalImg");
 
@@ -318,7 +321,7 @@ document.addEventListener('keydown', function(event) {
     } else if (event.key === 's') {
         saveImage();
     }  else if (event.key === 'r') {
-        recordVideoMuxer();
+        chooseRecordingFunction();
     }  else if (event.key === 'i') {
         randomizeInputs();
     }
