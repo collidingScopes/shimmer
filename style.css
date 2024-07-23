@@ -220,10 +220,6 @@ button {
     cursor: pointer;
 }
 
-button:hover{
-    background-color: #d2f1ed;
-}
-
 .recordButton{
     border: 3px solid #4a2bb0;
     background-color: #4a2bb0;
